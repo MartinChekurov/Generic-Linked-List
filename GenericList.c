@@ -25,7 +25,7 @@ static GenListNode* genLisNewNode(void* data, unsigned int dataSize)
     if (!node) {
         return NULL;
     }
-    memset(node, 0, sizeof(node));
+    memset(node, 0, sizeof(*node));
     node->data = malloc(dataSize);
     if (!node->data) {
         return NULL;
@@ -51,7 +51,7 @@ GenList* genLisNew(unsigned int dataSize, Compare cmp)
     if (!list) {
         return NULL;
     }
-    memset(list, 0, sizeof(list));
+    memset(list, 0, sizeof(*list));
     list->dataSize = dataSize;
     if (cmp) {
         list->cmp = cmp;
@@ -136,7 +136,7 @@ void* genListSearchNode(GenList* list, void* data)
 
 GenListError genListDestroy(GenList* list)
 {
-    GenListNode* node = NULL, *next = NULL;
+    GenListNode* node = NULL;
     GenListError status = GEN_LIST_NO_ERR;
     if (!list) {
         return GEN_LIST_WRONG_PAR;
