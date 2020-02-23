@@ -1,0 +1,45 @@
+Initialize the list.
+Push 5 nodes:
+Push value: 1.
+Push value: 2.
+Push value: 3.
+Push value: 4.
+Push value: 5.
+Get value on index 0.
+Got value: 5.
+Get value on index 1.
+Got value: 4.
+Get value on index 2.
+Got value: 3.
+Get value on index 3.
+Got value: 2.
+Get value on index 4.
+Got value: 1.
+Pushed 5 nodes.
+Find value: 1.
+Found value: 1.
+Find value: 2.
+Found value: 2.
+Find value: 3.
+Found value: 3.
+Find value: 4.
+Found value: 4.
+Find value: 5.
+Found value: 5.
+Pop a value from the list.
+Poped value: 5.
+Values left: 4.
+Pop a value from the list.
+Poped value: 4.
+Values left: 3.
+Pop a value from the list.
+Poped value: 3.
+Values left: 2.
+Pop a value from the list.
+Poped value: 2.
+Values left: 1.
+Pop a value from the list.
+Poped value: 1.
+Values left: 0.
+Destroy the list.
+Done.
