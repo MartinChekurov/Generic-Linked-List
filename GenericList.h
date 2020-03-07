@@ -6,8 +6,6 @@
 #define GEN_LIST_H_
 
 #include <stdlib.h>
-#include <string.h>
-#include <limits.h>
 
 typedef enum {
 
@@ -19,12 +17,12 @@ typedef enum {
 typedef GenListErr (*Compare)(void*, void*);
 typedef struct GenList_t GenList;
 
-GenList*   genListNew       (unsigned int dataSize, Compare cmp);
+GenList*   genListNew       (size_t dataSize, Compare cmp);
 GenListErr genListDestroy   (GenList* list);
 GenListErr genListPushHead  (GenList* list, void* data);
-GenListErr genListPopHead   (GenList* list, void* buf, unsigned int size);
-GenListErr genListSearchNode(GenList* list, void* data, void* buf, unsigned int size);
-GenListErr genListGetSize   (GenList* list, unsigned int *size);
-GenListErr genListGetIndex  (GenList* list, unsigned int index, void* buf, unsigned int size);
+GenListErr genListPopHead   (GenList* list, void* buf, size_t size);
+GenListErr genListSearchNode(GenList* list, void* data, void* buf, size_t size);
+GenListErr genListGetSize   (GenList* list, size_t *size);
+GenListErr genListGetIndex  (GenList* list, size_t index, void* buf, size_t size);
 
 #endif
