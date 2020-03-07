@@ -130,14 +130,16 @@ GenListErr genListSearchNode(GenList* list, void* data, size_t *index)
 {
     GenListNode* node = NULL;
     size_t count = 0;
-    if (!list || !data || !index) {
+    if (!list || !data) {
         return GEN_LIST_ERR;
     }
     node = list->head;
     while(node) {
         if (list->cmp) {
             if (list->cmp(node->data, data) == GEN_LIST_NO_ERR) {
-                *index = count;
+                if (index){
+                    *index = count;
+                }
                 return GEN_LIST_NO_ERR;
             }
         }
