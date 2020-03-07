@@ -17,15 +17,15 @@ Get value on index 4.
 Got value: 1.
 Pushed 5 nodes.
 Find value: 1.
-Found value: 1.
+Found value at index: 4.
 Find value: 2.
-Found value: 2.
+Found value at index: 3.
 Find value: 3.
-Found value: 3.
+Found value at index: 2.
 Find value: 4.
-Found value: 4.
+Found value at index: 1.
 Find value: 5.
-Found value: 5.
+Found value at index: 0.
 Pop a value from the list.
 Poped value: 5.
 Values left: 4.

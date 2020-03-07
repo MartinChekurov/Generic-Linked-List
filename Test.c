@@ -13,7 +13,7 @@ int main(void)
     GenListErr status = GEN_LIST_NO_ERR;
     GenList* list = NULL;
     unsigned int buf[MAX_NODES] = {1, 2, 3, 4, 5};
-    unsigned int i = 0, size = 0, value = 0;
+    unsigned int i = 0, size = 0, value = 0, index = 0;
 
     printf("\nInitialize the list.");
     list = genListNew(sizeof(int), compare);
@@ -47,12 +47,12 @@ int main(void)
     printf("\nPushed %d nodes.", size);
     for (i = 0 ; i < MAX_NODES ; i++) {
         printf("\nFind value: %d.", buf[i]);
-        status = genListSearchNode(list, &buf[i], &value, sizeof(int));
+        status = genListSearchNode(list, &buf[i], &index);
         if (status != GEN_LIST_NO_ERR) {
             printf("\ngenListSearchNode() error: %d", (int)status);
             return 1;
         }
-        printf("\nFound value: %d.", value);
+        printf("\nFound value at index: %d.", index);
     }
     for (i = 0 ; i < MAX_NODES ; i++) {
         printf("\nPop a value from the list.");

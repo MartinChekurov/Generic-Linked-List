@@ -21,7 +21,7 @@ GenList*   genListNew       (size_t dataSize, Compare cmp);
 GenListErr genListDestroy   (GenList* list);
 GenListErr genListPushHead  (GenList* list, void* data);
 GenListErr genListPopHead   (GenList* list, void* buf, size_t size);
-GenListErr genListSearchNode(GenList* list, void* data, void* buf, size_t size);
+GenListErr genListSearchNode(GenList* list, void* data, size_t *index);
 GenListErr genListGetSize   (GenList* list, size_t *size);
 GenListErr genListGetIndex  (GenList* list, size_t index, void* buf, size_t size);
 

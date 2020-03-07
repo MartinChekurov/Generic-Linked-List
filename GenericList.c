@@ -126,20 +126,23 @@ GenListErr genListGetIndex(GenList* list, size_t index, void* buf, size_t size)
     return GEN_LIST_ERR;
 }
 
-GenListErr genListSearchNode(GenList* list, void* data, void* buf, size_t size)
+GenListErr genListSearchNode(GenList* list, void* data, size_t *index)
 {
     GenListNode* node = NULL;
-    if (!list || !data || !buf) {
+    size_t count = 0;
+    if (!list || !data || !index) {
         return GEN_LIST_ERR;
     }
     node = list->head;
     while(node) {
         if (list->cmp) {
             if (list->cmp(node->data, data) == GEN_LIST_NO_ERR) {
-                return genListCopyNodeData(node->data, list->dataSize, buf, size);
+                *index = count;
+                return GEN_LIST_NO_ERR;
             }
         }
         node = node->pNext;
+        count++;
     }
     return GEN_LIST_ERR;
 }
