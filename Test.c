@@ -5,7 +5,7 @@
 
 GenListError compare(void* dataIn, void* dataOut)
 {
-    return *(int*)dataIn == *(int*)dataOut ? GEN_LIST_MATCH : GEN_LIST_NO_MATCH;
+    return *(int*)dataIn == *(int*)dataOut ? GEN_LIST_NO_ERR : GEN_LIST_ERR;
 }
 
 int main(void)

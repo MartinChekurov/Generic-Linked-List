@@ -12,12 +12,7 @@
 typedef enum {
 
     GEN_LIST_NO_ERR,
-    GEN_LIST_WRONG_PAR,
-    GEN_LIST_NO_MEMORY,
-    GEN_LIST_MATCH,
-    GEN_LIST_NO_MATCH,
-    GEN_LIST_FULL,
-    GEN_LIST_ERROR
+    GEN_LIST_ERR
 
 }GenListError;
 

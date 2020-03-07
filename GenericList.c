@@ -17,12 +17,10 @@ struct GenList_t {
 
 static GenListError genListCopyNodeData(void* data, unsigned int dataSize, void* buf, unsigned int bufSize)
 {
-    unsigned int cSize = 0;
     if (!data || !buf) {
-        return GEN_LIST_WRONG_PAR;
+        return GEN_LIST_ERR;
     }
-    cSize = bufSize < dataSize ? bufSize : dataSize;
-    memcpy(buf, data, cSize);
+    memcpy(buf, data, bufSize < dataSize ? bufSize : dataSize);
     return GEN_LIST_NO_ERR;
 }
 
@@ -48,7 +46,7 @@ static GenListNode* genLisNewNode(void* data, unsigned int dataSize)
 static GenListError genListDestroyNode(GenListNode* node)
 {
     if (!node) {
-        return GEN_LIST_WRONG_PAR;
+        return GEN_LIST_ERR;
     }
     free(node->data);
     free(node);
@@ -74,14 +72,14 @@ GenListError genListPushHead(GenList* list, void* data)
 {
     GenListNode* node = NULL;
     if (!list || !data) {
-        return GEN_LIST_WRONG_PAR;
+        return GEN_LIST_ERR;
     }
     if (list->count == UINT_MAX) {
-        return GEN_LIST_FULL;
+        return GEN_LIST_ERR;
     }
     node = genLisNewNode(data, list->dataSize);
     if (!node) {
-        return GEN_LIST_NO_MEMORY;
+        return GEN_LIST_ERR;
     }
     node->pNext = list->head;
     list->head = node;
@@ -94,15 +92,15 @@ GenListError genListPopHead(GenList* list, void* buf, unsigned int size)
     GenListNode* node = NULL;
     GenListError status = GEN_LIST_NO_ERR;
     if (!list) {
-        return GEN_LIST_WRONG_PAR;
+        return GEN_LIST_ERR;
     }
     if (list->head) {
-        node = list->head;
-        list->head = node->pNext;
-        status = genListCopyNodeData(node->data, list->dataSize, buf, size);
+        status = genListCopyNodeData(list->head->data, list->dataSize, buf, size);
         if (status != GEN_LIST_NO_ERR) {
             return status;
         }
+        node = list->head;
+        list->head = node->pNext;
         genListDestroyNode(node);
         if (list->count)
             list->count--;
@@ -115,7 +113,7 @@ GenListError genListGetIndex(GenList* list, unsigned int index, void* buf, unsig
     GenListNode* node = NULL;
     unsigned int count = 0;
     if (!list) {
-        return GEN_LIST_WRONG_PAR;
+        return GEN_LIST_ERR;
     }
     node = list->head;
     while(node && count < list->count) {
@@ -125,27 +123,25 @@ GenListError genListGetIndex(GenList* list, unsigned int index, void* buf, unsig
         node = node->pNext;
         count++;
     }
-    return GEN_LIST_ERROR;
+    return GEN_LIST_ERR;
 }
 
 GenListError genListSearchNode(GenList* list, void* data, void* buf, unsigned int size)
 {
     GenListNode* node = NULL;
-    GenListError status = GEN_LIST_NO_ERR;
     if (!list || !data || !buf) {
-        return GEN_LIST_WRONG_PAR;
+        return GEN_LIST_ERR;
     }
     node = list->head;
     while(node) {
         if (list->cmp) {
-            status = list->cmp(node->data, data);
-            if (status == GEN_LIST_MATCH) {
+            if (list->cmp(node->data, data) == GEN_LIST_NO_ERR) {
                 return genListCopyNodeData(node->data, list->dataSize, buf, size);
             }
         }
         node = node->pNext;
     }
-    return GEN_LIST_ERROR;
+    return GEN_LIST_ERR;
 }
 
 GenListError genListDestroy(GenList* list)
@@ -153,7 +149,7 @@ GenListError genListDestroy(GenList* list)
     GenListNode* node = NULL;
     GenListError status = GEN_LIST_NO_ERR;
     if (!list) {
-        return GEN_LIST_WRONG_PAR;
+        return GEN_LIST_ERR;
     }
     while(list->head) {
         node = list->head;
@@ -170,7 +166,7 @@ GenListError genListDestroy(GenList* list)
 GenListError genListGetSize(GenList* list, unsigned int *size)
 {
     if (!list || !size) {
-        return GEN_LIST_WRONG_PAR;
+        return GEN_LIST_ERR;
     }
     *size = list->count;
     return GEN_LIST_NO_ERR;
