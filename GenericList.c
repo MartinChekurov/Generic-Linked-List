@@ -15,7 +15,7 @@ struct GenList_t {
     unsigned int count;
 };
 
-static GenListError genListCopyNodeData(void* data, unsigned int dataSize, void* buf, unsigned int bufSize)
+static GenListErr genListCopyNodeData(void* data, unsigned int dataSize, void* buf, unsigned int bufSize)
 {
     if (!data || !buf) {
         return GEN_LIST_ERR;
@@ -26,11 +26,10 @@ static GenListError genListCopyNodeData(void* data, unsigned int dataSize, void*
 
 static GenListNode* genLisNewNode(void* data, unsigned int dataSize)
 {
-    GenListNode* node = NULL;
     if (!data) {
         return NULL;
     }
-    node = malloc(sizeof(*node));
+    GenListNode* node = malloc(sizeof(*node));
     if (!node) {
         return NULL;
     }
@@ -43,7 +42,7 @@ static GenListNode* genLisNewNode(void* data, unsigned int dataSize)
     return node;
 }
 
-static GenListError genListDestroyNode(GenListNode* node)
+static GenListErr genListDestroyNode(GenListNode* node)
 {
     if (!node) {
         return GEN_LIST_ERR;
@@ -55,8 +54,7 @@ static GenListError genListDestroyNode(GenListNode* node)
 
 GenList* genListNew(unsigned int dataSize, Compare cmp)
 {
-    GenList* list = NULL;
-    list = malloc(sizeof(*list));
+    GenList* list = malloc(sizeof(*list));
     if (!list) {
         return NULL;
     }
@@ -68,16 +66,15 @@ GenList* genListNew(unsigned int dataSize, Compare cmp)
     return list;
 }
 
-GenListError genListPushHead(GenList* list, void* data)
+GenListErr genListPushHead(GenList* list, void* data)
 {
-    GenListNode* node = NULL;
     if (!list || !data) {
         return GEN_LIST_ERR;
     }
     if (list->count == UINT_MAX) {
         return GEN_LIST_ERR;
     }
-    node = genLisNewNode(data, list->dataSize);
+    GenListNode* node = genLisNewNode(data, list->dataSize);
     if (!node) {
         return GEN_LIST_ERR;
     }
@@ -87,10 +84,10 @@ GenListError genListPushHead(GenList* list, void* data)
     return GEN_LIST_NO_ERR;
 }
 
-GenListError genListPopHead(GenList* list, void* buf, unsigned int size)
+GenListErr genListPopHead(GenList* list, void* buf, unsigned int size)
 {
     GenListNode* node = NULL;
-    GenListError status = GEN_LIST_NO_ERR;
+    GenListErr status = GEN_LIST_NO_ERR;
     if (!list) {
         return GEN_LIST_ERR;
     }
@@ -108,7 +105,7 @@ GenListError genListPopHead(GenList* list, void* buf, unsigned int size)
     return GEN_LIST_NO_ERR;
 }
 
-GenListError genListGetIndex(GenList* list, unsigned int index, void* buf, unsigned int size)
+GenListErr genListGetIndex(GenList* list, unsigned int index, void* buf, unsigned int size)
 {
     GenListNode* node = NULL;
     unsigned int count = 0;
@@ -126,7 +123,7 @@ GenListError genListGetIndex(GenList* list, unsigned int index, void* buf, unsig
     return GEN_LIST_ERR;
 }
 
-GenListError genListSearchNode(GenList* list, void* data, void* buf, unsigned int size)
+GenListErr genListSearchNode(GenList* list, void* data, void* buf, unsigned int size)
 {
     GenListNode* node = NULL;
     if (!list || !data || !buf) {
@@ -144,10 +141,10 @@ GenListError genListSearchNode(GenList* list, void* data, void* buf, unsigned in
     return GEN_LIST_ERR;
 }
 
-GenListError genListDestroy(GenList* list)
+GenListErr genListDestroy(GenList* list)
 {
     GenListNode* node = NULL;
-    GenListError status = GEN_LIST_NO_ERR;
+    GenListErr status = GEN_LIST_NO_ERR;
     if (!list) {
         return GEN_LIST_ERR;
     }
@@ -163,7 +160,7 @@ GenListError genListDestroy(GenList* list)
     return GEN_LIST_NO_ERR;
 }
 
-GenListError genListGetSize(GenList* list, unsigned int *size)
+GenListErr genListGetSize(GenList* list, unsigned int *size)
 {
     if (!list || !size) {
         return GEN_LIST_ERR;

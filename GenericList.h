@@ -14,17 +14,17 @@ typedef enum {
     GEN_LIST_NO_ERR,
     GEN_LIST_ERR
 
-}GenListError;
+}GenListErr;
 
-typedef GenListError (*Compare)(void*, void*);
+typedef GenListErr (*Compare)(void*, void*);
 typedef struct GenList_t GenList;
 
-GenList*     genListNew        (unsigned int dataSize, Compare cmp);
-GenListError genListDestroy   (GenList* list);
-GenListError genListPushHead  (GenList* list, void* data);
-GenListError genListPopHead   (GenList* list, void* buf, unsigned int size);
-GenListError genListSearchNode(GenList* list, void* data, void* buf, unsigned int size);
-GenListError genListGetSize   (GenList* list, unsigned int *size);
-GenListError genListGetIndex  (GenList* list, unsigned int index, void* buf, unsigned int size);
+GenList*   genListNew       (unsigned int dataSize, Compare cmp);
+GenListErr genListDestroy   (GenList* list);
+GenListErr genListPushHead  (GenList* list, void* data);
+GenListErr genListPopHead   (GenList* list, void* buf, unsigned int size);
+GenListErr genListSearchNode(GenList* list, void* data, void* buf, unsigned int size);
+GenListErr genListGetSize   (GenList* list, unsigned int *size);
+GenListErr genListGetIndex  (GenList* list, unsigned int index, void* buf, unsigned int size);
 
 #endif

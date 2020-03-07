@@ -3,14 +3,14 @@
 
 #define MAX_NODES (5)
 
-GenListError compare(void* dataIn, void* dataOut)
+GenListErr compare(void* dataIn, void* dataOut)
 {
     return *(int*)dataIn == *(int*)dataOut ? GEN_LIST_NO_ERR : GEN_LIST_ERR;
 }
 
 int main(void)
 {
-    GenListError status = GEN_LIST_NO_ERR;
+    GenListErr status = GEN_LIST_NO_ERR;
     GenList* list = NULL;
     unsigned int buf[MAX_NODES] = {1, 2, 3, 4, 5};
     unsigned int i = 0, size = 0, value = 0;
